@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<style>
+#circle {
+    background-color:#fff;
+    border:1px solid powderblue;    
+    height:400px;
+    border-radius:50%;
+    width:400px;
+    align-content: center;
+}
+#smallCircle {
+    background-color: pink;
+    border:1px solid black;    
+    height:100px;
+    border-radius:50%;
+    width:100px;
+    align-content: center;
+	position: absolute; 
+}
+#parentCircle
+{
+position: relative;
+padding: 50px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+<script>
+const btn1 = document.createElement("button");
+const name1 = document.createTextNode("Start!");
+btn1.appendChild(name1);
+document.body.appendChild(btn1);
+const btn2 = document.createElement("button");
+const name2 = document.createTextNode("Stop!");
+btn2.appendChild(name2);
+document.body.appendChild(btn2);
+
+document.write( '<div id=\"parentCircle\"> \n' );
+document.write( '	<div id=\"smallCircle\"></div>\n' );
+document.write( '	<div id=\"circle\"></div>\n' );
+document.write( '</div>' );
+
+var alpha = 0;
+let startFunction = function Rotate() {
+    alpha += 0.05;
+    var r = 200;
+    var xcenter = 200;
+    var ycenter = 200;
+    var newLeft = Math.floor(xcenter + (r * Math.cos(alpha)));
+    var newTop = Math.floor(ycenter + (r * Math.sin(alpha)));
+    $('#smallCircle').animate({
+        top: newTop,
+        left: newLeft,
+    }, 1, function() {
+        Rotate();
+    });
+}
+ let stopFunction = function Stop()
+{
+	$('#smallCircle').stop(true, false);
+}
+btn1.addEventListener('click', startFunction);
+btn2.addEventListener('click', stopFunction);
+</script>
+
+</body>
+</html>
